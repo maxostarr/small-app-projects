@@ -1,0 +1,13 @@
+{
+  "name": "components",
+  "version": "1.0.0",
+  "description": "Components for apps",
+  "main": "index.ts",
+  "author": "Max Starr",
+  "license": "MIT",
+  "dependencies": {
+    "@types/styled-components": "^5.0.1",
+    "styled-components": "^5.0.1",
+    "typescript": "^3.8.3"
+  }
+}
