@@ -1,6 +1,7 @@
 const theme = {
   name: "Light",
   borderRadius: "5px",
+  fontFamily: "",
   colors: {
     primary: "#ff0198",
     secondary: "#01c1d6",

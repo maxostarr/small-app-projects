@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-
+import { Input } from "components/index";
 function App() {
   const [bin, setBin] = useState(0);
   const [dec, setDec] = useState(0);
@@ -26,10 +26,24 @@ function App() {
   };
 
   return (
-    <>
-      <input id="bin" type="number" value={bin} onChange={handleChange} />
-      <input id="dec" type="number" value={dec} onChange={handleChange} />
-    </>
+    <div>
+      <Input
+        id="bin"
+        type="number"
+        value={bin}
+        onChange={handleChange}
+        fontSize="8em"
+      />
+      <div>
+        <Input
+          id="dec"
+          type="number"
+          value={dec}
+          onChange={handleChange}
+          fontSize="8em"
+        />
+      </div>
+    </div>
   );
 }
 
