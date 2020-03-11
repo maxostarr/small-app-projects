@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
-export default styled.text`
+export default styled.input`
   border: none;
 `;
