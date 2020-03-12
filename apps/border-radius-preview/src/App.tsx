@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import { Card } from "components/index";
+import { BorderRadiusObject } from "components/card";
 function App() {
+  const borderRadiusObject: BorderRadiusObject = {
+    borderTopLeft: [10, 20],
+    borderBottomLeft: [10, 20],
+    borderTopRight: [10, 20],
+    borderBottomRight: [10, 20]
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Card
+        borderRadiusObject={borderRadiusObject}
+        width="50vh"
+        height="50vh"
+      ></Card>
+    </>
   );
 }
 
