@@ -27,6 +27,7 @@ function App() {
 
   return (
     <div>
+      <h1>Binary</h1>
       <Input
         id="bin"
         type="number"
@@ -34,6 +35,7 @@ function App() {
         onChange={handleChange}
         fontSize="8em"
       />
+      <h1>Decimal</h1>
       <div>
         <Input
           id="dec"
