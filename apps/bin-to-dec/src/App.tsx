@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import { Input } from "components/index";
+import { Text } from "components/index";
 function App() {
   const [bin, setBin] = useState(0);
   const [dec, setDec] = useState(0);
@@ -28,7 +28,7 @@ function App() {
   return (
     <div>
       <h1>Binary</h1>
-      <Input
+      <Text
         id="bin"
         type="number"
         value={bin}
@@ -37,7 +37,7 @@ function App() {
       />
       <h1>Decimal</h1>
       <div>
-        <Input
+        <Text
           id="dec"
           type="number"
           value={dec}
