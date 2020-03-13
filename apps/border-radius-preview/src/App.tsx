@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import { Card, Slider } from "components/index";
+import { Card, Text } from "components/index";
 import { BorderRadiusObject } from "components/card";
 const initialState: [number, number] = [10, 10];
 
@@ -32,27 +32,12 @@ function App() {
 
   return (
     <>
-      <Slider
-        type="range"
-        id="top"
-        value={topLeft[0]}
-        onChange={handleChange}
-        min={1}
-        max={100}
-      />
+      <Text />
       <Card
         borderRadiusObject={borderRadiusObject}
         width="50vh"
         height="50vh"
       ></Card>
-      <Slider
-        type="range"
-        id="bottom"
-        value={bottomLeft[0]}
-        onChange={handleChange}
-        min={1}
-        max={100}
-      />
     </>
   );
 }
