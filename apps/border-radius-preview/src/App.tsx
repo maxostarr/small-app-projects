@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import { Card, Slider } from "components/index";
 import { BorderRadiusObject } from "components/card";
 const initialState: [number, number] = [10, 10];
+
 function App() {
   const [topLeft, setTopLeft] = useState(initialState);
   const [topRight, setTopRight] = useState(initialState);
@@ -15,12 +16,16 @@ function App() {
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target);
+
     switch (e.target.id) {
-      case "topLefta":
-        setTopLeft([parseInt(e.target.value), topLeft[1]]);
+      case "top":
+        setTopRight([100 - parseInt(e.target.value), topRight[1]]);
+        setTopLeft([parseInt(e.target.value), topRight[1]]);
         return;
-      case "topRighta":
-        setTopRight([parseInt(e.target.value), topRight[1]]);
+      case "bottom":
+        setBottomRight([100 - parseInt(e.target.value), topRight[1]]);
+        setBottomLeft([parseInt(e.target.value), topRight[1]]);
         return;
     }
   };
@@ -28,27 +33,26 @@ function App() {
   return (
     <>
       <Slider
-        id="topLefta"
         type="range"
-        min={1}
-        max={100}
+        id="top"
         value={topLeft[0]}
         onChange={handleChange}
-      />
-      <Slider
-        id="topRighta"
-        type="range"
         min={1}
         max={100}
-        value={topRight[0]}
-        direction="rtl"
-        onChange={handleChange}
       />
       <Card
         borderRadiusObject={borderRadiusObject}
         width="50vh"
         height="50vh"
       ></Card>
+      <Slider
+        type="range"
+        id="bottom"
+        value={bottomLeft[0]}
+        onChange={handleChange}
+        min={1}
+        max={100}
+      />
     </>
   );
 }

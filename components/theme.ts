@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, DefaultTheme } from "styled-components";
 
-const theme = {
+const theme: DefaultTheme = {
   name: "Light",
   borderRadius: "5px",
   fontFamily: "Roboto",

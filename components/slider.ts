@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface SliderProps {
   direction?: string;
+  handleColor?: "primary" | "secondary" | "danger";
 }
 
 const slider = styled.input<SliderProps>`
@@ -12,23 +13,23 @@ const slider = styled.input<SliderProps>`
   background: ${props => props.theme.colors.primary}; /* Grey background */
   outline: none; /* Remove outline */
   opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
-  transition: opacity 0.2s;
-  direction: ${props => props.direction};
+  direction: ${props => (props.direction ? props.direction : "ltr")};
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background: #2f2f2f;
+    background: ${props =>
+      props.handleColor ? props.theme.colors[props.handleColor] : "#2f2f2f"};
     cursor: pointer;
   }
   &::-moz-range-thumb {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background: #2f2f2f;
+    background: ${props =>
+      props.handleColor ? props.theme.colors[props.handleColor] : "#2f2f2f"};
     cursor: pointer;
   }
 `;
