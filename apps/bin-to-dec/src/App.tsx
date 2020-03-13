@@ -34,6 +34,7 @@ function App() {
         value={bin}
         onChange={handleChange}
         fontSize="8em"
+        aria-label="bin"
       />
       <h1>Decimal</h1>
       <div>
@@ -43,6 +44,7 @@ function App() {
           value={dec}
           onChange={handleChange}
           fontSize="8em"
+          aria-label="dec"
         />
       </div>
     </div>
