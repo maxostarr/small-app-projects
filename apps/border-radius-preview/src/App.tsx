@@ -1,43 +1,112 @@
 import React, { useState, ChangeEvent } from "react";
-import { Card, Text } from "components/index";
+import { Card, Text, GridContainer, GridItem } from "components/index";
 import { BorderRadiusObject } from "components/card";
-const initialState: [number, number] = [10, 10];
+const initialState: BorderRadiusObject = {
+  topLeft: { a: 10, b: 10 },
+  bottomLeft: { a: 10, b: 10 },
+  topRight: { a: 10, b: 10 },
+  bottomRight: { a: 10, b: 10 }
+};
 
 function App() {
-  const [topLeft, setTopLeft] = useState(initialState);
-  const [topRight, setTopRight] = useState(initialState);
-  const [bottomLeft, setBottomLeft] = useState(initialState);
-  const [bottomRight, setBottomRight] = useState(initialState);
-  const borderRadiusObject: BorderRadiusObject = {
-    borderTopLeft: topLeft,
-    borderBottomLeft: bottomLeft,
-    borderTopRight: topRight,
-    borderBottomRight: bottomRight
-  };
+  const [borderRadiusObject, setBorderRadiusObject] = useState(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target);
+    console.log(borderRadiusObject);
+    const [corner, pair]: string[] = e.target.id.split(".");
+    console.log(corner, pair);
 
-    switch (e.target.id) {
-      case "top":
-        setTopRight([100 - parseInt(e.target.value), topRight[1]]);
-        setTopLeft([parseInt(e.target.value), topRight[1]]);
-        return;
-      case "bottom":
-        setBottomRight([100 - parseInt(e.target.value), topRight[1]]);
-        setBottomLeft([parseInt(e.target.value), topRight[1]]);
-        return;
-    }
+    setBorderRadiusObject({
+      ...borderRadiusObject,
+      [corner]: {
+        ...borderRadiusObject[corner],
+        [pair]: parseInt(e.target.value)
+      }
+    });
   };
 
+  console.log(borderRadiusObject);
   return (
     <>
-      <Text />
-      <Card
-        borderRadiusObject={borderRadiusObject}
-        width="50vh"
-        height="50vh"
-      ></Card>
+      <h1>Border Radius Preview!</h1>
+      <GridContainer width="70vh" height="70vh">
+        <GridItem gridColumn="2/3" gridRow="1/1" justify="center" align="end">
+          <Text
+            type="number"
+            width="3em"
+            onChange={handleChange}
+            value={borderRadiusObject.topLeft.a}
+            id="topLeft.a"
+          />
+        </GridItem>
+        <GridItem gridColumn="4/5" gridRow="1/1" justify="center" align="end">
+          <Text
+            type="number"
+            width="3em"
+            onChange={handleChange}
+            value={borderRadiusObject.topRight.a}
+            id="topRight.a"
+          />
+        </GridItem>
+        <GridItem gridColumn="1/2" gridRow="2/3" justify="end" align="center">
+          <Text
+            type="number"
+            width="3em"
+            onChange={handleChange}
+            value={borderRadiusObject.topLeft.b}
+            id="topLeft.b"
+          />
+        </GridItem>
+        <GridItem gridColumn="2/5" gridRow="2/5" padding="1em">
+          <Card borderRadiusObject={borderRadiusObject}></Card>
+        </GridItem>
+        <GridItem gridColumn="5/6" gridRow="2/3" justify="start" align="center">
+          <Text
+            type="number"
+            width="3em"
+            onChange={handleChange}
+            value={borderRadiusObject.topRight.b}
+            id="topRight.b"
+          />
+        </GridItem>
+        <GridItem gridColumn="1/2" gridRow="4/5" justify="end" align="center">
+          <Text
+            type="number"
+            width="3em"
+            onChange={handleChange}
+            value={borderRadiusObject.bottomLeft.b}
+            id="bottomLeft.b"
+          />
+        </GridItem>
+        <GridItem gridColumn="5/6" gridRow="4/5" justify="start" align="center">
+          <Text
+            type="number"
+            width="3em"
+            onChange={handleChange}
+            value={borderRadiusObject.bottomRight.b}
+            id="bottomRight.b"
+          />
+        </GridItem>
+        <GridItem gridColumn="2/3" gridRow="5/6" justify="center" align="top">
+          <Text
+            type="number"
+            width="3em"
+            onChange={handleChange}
+            value={borderRadiusObject.bottomLeft.a}
+            id="bottomLeft.a"
+          />
+        </GridItem>
+        <GridItem gridColumn="4/5" gridRow="5/6" justify="center" align="top">
+          <Text
+            type="number"
+            width="3em"
+            onChange={handleChange}
+            value={borderRadiusObject.bottomRight.a}
+            id="bottomRight.a"
+          />
+        </GridItem>
+      </GridContainer>
     </>
   );
 }

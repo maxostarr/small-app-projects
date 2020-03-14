@@ -17,7 +17,12 @@ export default theme;
 
 export const GlobalStyle = createGlobalStyle`
   body{
-    margin: 1.5em;
     font-family: ${props => props.theme.fontFamily};
+    width: 100vw;
+    height: 100vh;
+  }
+  #root {
+    padding: 1.5em;
+    height: calc(100% - 3em);
   }
 `;

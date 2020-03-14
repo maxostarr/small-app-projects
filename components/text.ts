@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface InputProps {
   fontSize?: string;
+  width?: string;
 }
 
 const input = styled.input<InputProps>`
@@ -13,6 +14,7 @@ const input = styled.input<InputProps>`
   font-size: ${props => props.fontSize};
   -webkit-appearance: none;
   -moz-appearance: textfield;
+  width: ${props => props.width};
 `;
 
 export default input;
