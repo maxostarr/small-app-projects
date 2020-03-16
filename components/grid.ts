@@ -3,14 +3,22 @@ import styled from "styled-components";
 interface GridContainerProps {
   width?: string;
   height?: string;
+  numberOfColumns?: number;
+  numberOfRows?: number;
 }
 
 export const GridContainer = styled.div<GridContainerProps>`
   width: ${props => props.width || "100%"};
   height: ${props => props.height || "100%"};
   display: grid;
-  grid-template-columns: repeat(5, calc(${props => props.width} / 5));
-  grid-template-rows: repeat(5, calc(${props => props.height} / 5));
+  grid-template-columns: repeat(
+    ${props => (props.numberOfColumns ? props.numberOfColumns : 5)},
+    calc(${props => props.width} / 5)
+  );
+  grid-template-rows: repeat(
+    ${props => (props.numberOfRows ? props.numberOfRows : 5)},
+    calc(${props => props.height} / 5)
+  );
   align-items: stretch;
   justify-items: stretch;
 `;

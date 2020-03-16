@@ -13,6 +13,7 @@ interface CardProps {
   borderRadiusObject?: BorderRadiusObject;
   padding?: string;
   margin?: string;
+  backgroundColor?: string;
 }
 
 const card = styled.div<CardProps>`
@@ -21,6 +22,8 @@ const card = styled.div<CardProps>`
   background-color: ${props => props.theme.colors.secondary};
   padding: ${props => (props.padding ? props.padding : "0")};
   margin: ${props => (props.margin ? props.margin : "0")};
+  background-color: ${props =>
+    props.backgroundColor ? props.backgroundColor : "grey"};
   border-radius: ${({ borderRadiusObject }) => {
     if (borderRadiusObject) {
       return `
