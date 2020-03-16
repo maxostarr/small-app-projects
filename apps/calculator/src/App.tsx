@@ -3,7 +3,7 @@ import { Card, GridContainer, GridItem } from "components/index";
 import "./App.css";
 
 const buttons = [
-  { label: "", columns: "1/5", rows: "1/1", color: "" },
+  { label: "", columns: "span 4", rows: "", color: "#111" },
   {
     label: "AC",
     columns: "",
@@ -129,19 +129,7 @@ function App() {
         width="50%"
         height="70%"
       >
-        {/* <GridItem gridColumn="1/2" gridRow="2/2">
-          <Card backgroundColor="lightGrey">AC</Card>
-        </GridItem>
-        <GridItem gridColumn="2/3" gridRow="2/2">
-          <Card backgroundColor="lightGrey">+-</Card>
-        </GridItem>
-        <GridItem gridColumn="3/4" gridRow="2/2">
-          <Card backgroundColor="lightGrey">%</Card>
-        </GridItem>
-        <GridItem gridColumn="4/5" gridRow="2/2">
-          <Card backgroundColor="orange">/</Card>
-        </GridItem> */}
-        {buttons.map((key, i) => {
+        {buttons.map(key => {
           return (
             <GridItem gridColumn={key.columns} gridRow={key.rows}>
               <Card backgroundColor={key.color}>{key.label}</Card>
