@@ -12,11 +12,7 @@ function App() {
   const [borderRadiusObject, setBorderRadiusObject] = useState(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target);
-    console.log(borderRadiusObject);
     const [corner, pair]: string[] = e.target.id.split(".");
-    console.log(corner, pair);
-
     setBorderRadiusObject({
       ...borderRadiusObject,
       [corner]: {
@@ -26,10 +22,23 @@ function App() {
     });
   };
 
-  console.log(borderRadiusObject);
   return (
     <>
       <h1>Border Radius Preview!</h1>
+      <p data-testid="output">
+        border-radius:
+        {`
+      ${borderRadiusObject.topLeft.a}%
+      ${borderRadiusObject.topRight.a}%
+      ${borderRadiusObject.bottomRight.a}%
+      ${borderRadiusObject.bottomLeft.a}%
+      /
+      ${borderRadiusObject.topLeft.b}%
+      ${borderRadiusObject.topRight.b}%
+      ${borderRadiusObject.bottomRight.b}%
+      ${borderRadiusObject.bottomLeft.b}%
+      `}
+      </p>
       <GridContainer width="70vh" height="70vh">
         <GridItem gridColumn="2/3" gridRow="1/1" justify="center" align="end">
           <Text
@@ -38,6 +47,7 @@ function App() {
             onChange={handleChange}
             value={borderRadiusObject.topLeft.a}
             id="topLeft.a"
+            data-testid="topLeft"
           />
         </GridItem>
         <GridItem gridColumn="4/5" gridRow="1/1" justify="center" align="end">
@@ -59,7 +69,10 @@ function App() {
           />
         </GridItem>
         <GridItem gridColumn="2/5" gridRow="2/5" padding="1em">
-          <Card borderRadiusObject={borderRadiusObject}></Card>
+          <Card
+            borderRadiusObject={borderRadiusObject}
+            data-testid="card"
+          ></Card>
         </GridItem>
         <GridItem gridColumn="5/6" gridRow="2/3" justify="start" align="center">
           <Text
