@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState, MouseEvent, Key } from "react";
 import { Card, GridContainer, GridItem } from "components/index";
 import { useKeyPress } from "./useKeyPress";
 import "./App.css";
@@ -140,16 +140,18 @@ function App() {
   const [result, setResult] = useState("0");
   const [operator, setOperator] = useState("" as operator);
 
-  const handleDigitInput = (digit: string) => {
+  const handleDigitInput = (digit: Key) => {
     if (currentNumber === result) {
-      setCurrentNumber(digit);
+      setCurrentNumber(digit.toString());
       setResult("0");
       return;
     }
     if (currentNumber === "0" || currentNumber === "-0") {
-      setCurrentNumber(currentNumber.includes("-") ? "-" + digit : digit);
+      setCurrentNumber(
+        currentNumber.includes("-") ? "-" + digit.toString() : digit.toString()
+      );
     } else {
-      setCurrentNumber(currentNumber + digit);
+      setCurrentNumber(currentNumber + digit.toString());
     }
     return;
   };
@@ -179,10 +181,8 @@ function App() {
     setOperator("" as operator);
   };
 
-  useKeyPress(/\d/, (key: string) => handleDigitInput(key));
-  useKeyPress(/\+|-|\*|\//, (key: string) =>
-    handleOperatorInput(key as operator)
-  );
+  useKeyPress(/\d/, (key: Key) => handleDigitInput(key));
+  useKeyPress(/\+|-|\*|\//, (key: Key) => handleOperatorInput(key as operator));
   useKeyPress("Enter", handleCompute);
   useKeyPress(/Backspace|Delete/, handleClear);
 

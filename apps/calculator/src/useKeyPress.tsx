@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, Key } from "react";
 
 export const useKeyPress = (
   targetKey: string | RegExp,
-  callback: (key: string) => void
+  callback: (key: Key) => void
 ) => {
   const onKeyDown = (e: KeyboardEvent) => {
     if (typeof targetKey == "string") {
