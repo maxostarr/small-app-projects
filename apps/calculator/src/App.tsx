@@ -257,6 +257,7 @@ function App() {
                 fontSize: "2.5em",
                 paddingRight: ".5em"
               }}
+              data-testid="output"
             >
               {currentNumber}
             </div>
