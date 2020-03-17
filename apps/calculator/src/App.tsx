@@ -1,5 +1,6 @@
 import React, { useState, MouseEvent } from "react";
 import { Card, GridContainer, GridItem } from "components/index";
+import { useKeyPress } from "./useKeyPress";
 import "./App.css";
 
 const buttons = [
@@ -120,6 +121,7 @@ const buttons = [
 ];
 
 type operator = "+" | "-" | "*" | "/" | "";
+
 type operatorFunctionsType = {
   [T in operator]: (a: number, b: number) => number;
 };
@@ -152,24 +154,51 @@ function App() {
     return;
   };
 
+  const handleOperatorInput = (operator: operator) => {
+    setOperator(operator);
+    setPreviousNumber(currentNumber);
+    setCurrentNumber("0");
+  };
+
+  const handleCompute = () => {
+    let result_ = operatorFunctions[operator](
+      parseFloat(previousNumber),
+      parseFloat(currentNumber)
+    );
+
+    setResult(result_.toString());
+    setCurrentNumber(result_.toString());
+    setPreviousNumber("0");
+    setOperator("" as operator);
+  };
+
+  const handleClear = () => {
+    setCurrentNumber("0");
+    setPreviousNumber("0");
+    setResult("0");
+    setOperator("" as operator);
+  };
+
+  useKeyPress(/\d/, (key: string) => handleDigitInput(key));
+  useKeyPress(/\+|-|\*|\//, (key: string) =>
+    handleOperatorInput(key as operator)
+  );
+  useKeyPress("Enter", handleCompute);
+  useKeyPress(/Backspace|Delete/, handleClear);
+
   const handleClick = (e: MouseEvent) => {
     if (/\d/.test(e.currentTarget.id)) {
       handleDigitInput(e.currentTarget.id);
     }
 
     if (/\+|-|\*|\//.test(e.currentTarget.id)) {
-      setOperator(e.currentTarget.id as operator);
-      setPreviousNumber(currentNumber);
-      setCurrentNumber("0");
+      handleOperatorInput(e.currentTarget.id as operator);
       return;
     }
 
     switch (e.currentTarget.id) {
       case "AC":
-        setCurrentNumber("0");
-        setPreviousNumber("0");
-        setResult("0");
-        setOperator("" as operator);
+        handleClear();
         break;
       case ".":
         if (!currentNumber.includes(".")) {
@@ -185,15 +214,7 @@ function App() {
 
         break;
       case "=":
-        let result_ = operatorFunctions[operator](
-          parseFloat(previousNumber),
-          parseFloat(currentNumber)
-        );
-
-        setResult(result_.toString());
-        setCurrentNumber(result_.toString());
-        setPreviousNumber("0");
-        setOperator("" as operator);
+        handleCompute();
         break;
     }
   };
