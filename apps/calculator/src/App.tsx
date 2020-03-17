@@ -152,6 +152,9 @@ function App() {
       );
     } else {
       setCurrentNumber(currentNumber + digit.toString());
+      if (currentNumber + digit.toString() === "80085") {
+        alert("FUCK YEAH!!!");
+      }
     }
     return;
   };
