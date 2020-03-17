@@ -5,6 +5,7 @@ export const useKeyPress = (
   callback: (key: Key) => void
 ) => {
   const onKeyDown = (e: KeyboardEvent) => {
+    e.preventDefault();
     if (typeof targetKey == "string") {
       if (e.key === targetKey) {
         callback(e.key);

@@ -131,7 +131,7 @@ const operatorFunctions: operatorFunctionsType = {
   "-": (a, b) => a - b,
   "/": (a, b) => a / b,
   "*": (a, b) => a * b,
-  "": (a, _) => a
+  "": (_, b) => b
 };
 
 function App() {
@@ -157,9 +157,11 @@ function App() {
   };
 
   const handleOperatorInput = (operator: operator) => {
-    setOperator(operator);
-    setPreviousNumber(currentNumber);
-    setCurrentNumber("0");
+    if (currentNumber !== "0" && currentNumber !== "-0") {
+      setOperator(operator);
+      setPreviousNumber(currentNumber);
+      setCurrentNumber("0");
+    }
   };
 
   const handleCompute = () => {
