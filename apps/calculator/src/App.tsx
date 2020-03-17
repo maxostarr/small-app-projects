@@ -119,33 +119,46 @@ const buttons = [
   }
 ];
 
+type operator = "+" | "-" | "*" | "/" | "";
+type operatorFunctionsType = {
+  [T in operator]: (a: number, b: number) => number;
+};
+
+const operatorFunctions: operatorFunctionsType = {
+  "+": (a, b) => a + b,
+  "-": (a, b) => a - b,
+  "/": (a, b) => a / b,
+  "*": (a, b) => a * b,
+  "": (a, _) => a
+};
+
 function App() {
   const [currentNumber, setCurrentNumber] = useState("0");
   const [previousNumber, setPreviousNumber] = useState("0");
   const [result, setResult] = useState("0");
-  const [operator, setOperator] = useState("");
+  const [operator, setOperator] = useState("" as operator);
+
+  const handleDigitInput = (digit: string) => {
+    if (currentNumber === result) {
+      setCurrentNumber(digit);
+      setResult("0");
+      return;
+    }
+    if (currentNumber === "0" || currentNumber === "-0") {
+      setCurrentNumber(currentNumber.includes("-") ? "-" + digit : digit);
+    } else {
+      setCurrentNumber(currentNumber + digit);
+    }
+    return;
+  };
 
   const handleClick = (e: MouseEvent) => {
     if (/\d/.test(e.currentTarget.id)) {
-      if (currentNumber === result) {
-        setCurrentNumber(e.currentTarget.id);
-        setResult("0");
-        return;
-      }
-      if (currentNumber === "0" || currentNumber === "-0") {
-        setCurrentNumber(
-          currentNumber.includes("-")
-            ? "-" + e.currentTarget.id
-            : e.currentTarget.id
-        );
-      } else {
-        setCurrentNumber(currentNumber + e.currentTarget.id);
-      }
-      return;
+      handleDigitInput(e.currentTarget.id);
     }
 
     if (/\+|-|\*|\//.test(e.currentTarget.id)) {
-      setOperator(e.currentTarget.id);
+      setOperator(e.currentTarget.id as operator);
       setPreviousNumber(currentNumber);
       setCurrentNumber("0");
       return;
@@ -156,7 +169,7 @@ function App() {
         setCurrentNumber("0");
         setPreviousNumber("0");
         setResult("0");
-        setOperator("");
+        setOperator("" as operator);
         break;
       case ".":
         if (!currentNumber.includes(".")) {
@@ -172,35 +185,15 @@ function App() {
 
         break;
       case "=":
-        let result_ = "";
-        switch (operator) {
-          case "+":
-            result_ = (
-              parseFloat(previousNumber) + parseFloat(currentNumber)
-            ).toString();
-            break;
-          case "-":
-            result_ = (
-              parseFloat(previousNumber) - parseFloat(currentNumber)
-            ).toString();
-            break;
-          case "*":
-            result_ = (
-              parseFloat(previousNumber) * parseFloat(currentNumber)
-            ).toString();
-            break;
-          case "/":
-            result_ = (
-              parseFloat(previousNumber) / parseFloat(currentNumber)
-            ).toString();
-            break;
-          default:
-            result_ = result;
-        }
-        setResult(result_);
-        setCurrentNumber(result_);
+        let result_ = operatorFunctions[operator](
+          parseFloat(previousNumber),
+          parseFloat(currentNumber)
+        );
+
+        setResult(result_.toString());
+        setCurrentNumber(result_.toString());
         setPreviousNumber("0");
-        setOperator("");
+        setOperator("" as operator);
         break;
     }
   };
