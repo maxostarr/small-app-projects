@@ -132,7 +132,9 @@ function App() {
         {buttons.map(key => {
           return (
             <GridItem gridColumn={key.columns} gridRow={key.rows}>
-              <Card backgroundColor={key.color}>{key.label}</Card>
+              <Card backgroundColor={key.color} id={key.label}>
+                {key.label}
+              </Card>
             </GridItem>
           );
         })}
