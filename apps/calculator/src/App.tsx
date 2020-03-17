@@ -17,7 +17,7 @@ const buttons = [
     color: "rgba(202,202,204,1)"
   },
   {
-    label: "+-",
+    label: "±",
     columns: "",
     rows: "",
     color: "rgba(202,202,204,1)"
@@ -132,8 +132,22 @@ function App() {
         {buttons.map(key => {
           return (
             <GridItem gridColumn={key.columns} gridRow={key.rows}>
-              <Card backgroundColor={key.color} id={key.label}>
-                {key.label}
+              <Card
+                backgroundColor={key.color}
+                id={key.label}
+                style={{ border: "1px solid #222" }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%",
+                    fontSize: "2em"
+                  }}
+                >
+                  {key.label}
+                </div>
               </Card>
             </GridItem>
           );
