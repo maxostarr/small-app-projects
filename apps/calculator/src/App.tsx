@@ -249,6 +249,7 @@ function App() {
               style={{
                 paddingRight: ".5em"
               }}
+              data-testid="secondaryOuput"
             >
               {previousNumber === "0" ? " " : previousNumber} {operator}
             </div>
