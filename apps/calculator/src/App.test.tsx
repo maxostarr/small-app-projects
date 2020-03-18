@@ -23,6 +23,28 @@ test("can type in number", () => {
   expect(outputDisplay).toHaveTextContent(num);
 });
 
+test("clear", () => {
+  const { outputDisplay, secondaryOuputDisplay, getByText } = renderExtras();
+  const oneDigitKey = getByText("1");
+  const CKey = getByText("C");
+  fireEvent.mouseDown(oneDigitKey);
+  expect(outputDisplay).toHaveTextContent("1");
+  fireEvent.mouseDown(CKey);
+  expect(outputDisplay).toHaveTextContent("0");
+
+  fireEvent.mouseDown(oneDigitKey);
+  fireEvent.mouseDown(oneDigitKey);
+  fireEvent.mouseDown(getByText("+"));
+  expect(outputDisplay).toHaveTextContent("0");
+  expect(secondaryOuputDisplay).toHaveTextContent("11 +");
+  fireEvent.mouseDown(oneDigitKey);
+  fireEvent.mouseDown(oneDigitKey);
+  expect(outputDisplay).toHaveTextContent("11");
+  fireEvent.mouseDown(getByText("C"));
+  expect(outputDisplay).toHaveTextContent("0");
+  expect(secondaryOuputDisplay).toHaveTextContent("11 +");
+});
+
 test("clear all", () => {
   const { outputDisplay, getByText } = renderExtras();
   const oneDigitKey = getByText("1");

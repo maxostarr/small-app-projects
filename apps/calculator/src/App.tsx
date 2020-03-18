@@ -11,7 +11,7 @@ const buttons = [
     color: "#cacacc"
   },
   {
-    label: "%",
+    label: "C",
     columns: "",
     rows: "",
     color: "#cacacc"
@@ -204,6 +204,9 @@ function App() {
     switch (e.currentTarget.id) {
       case "AC":
         handleClear();
+        break;
+      case "C":
+        setCurrentNumber("0");
         break;
       case ".":
         if (!currentNumber.includes(".")) {
