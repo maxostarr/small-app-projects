@@ -1,0 +1,19 @@
+import React from "react";
+import { render } from "@testing-library/react";
+import { ThemeProvider } from "styled-components";
+import theme from "components/theme";
+
+type PropTypes = {
+  children: JSX.Element[];
+};
+
+const Wrapper = ({ children }: PropTypes) => {
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+};
+
+const customRender = (ui, options = {}) =>
+  render(ui, { wrapper: Wrapper, ...options });
+
+export * from "@testing-library/react";
+
+export { customRender as render };
