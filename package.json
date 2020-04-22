@@ -1,0 +1,13 @@
+{
+  "name": "small-app-projects",
+  "version": "1.0.0",
+  "description": "small app projects",
+  "main": "index.js",
+  "author": "Max Starr <manmon42@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "components"
+  ]
+}
